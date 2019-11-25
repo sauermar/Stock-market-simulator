@@ -1,0 +1,72 @@
+﻿@model Stonk.Models.Persons.User
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<br><br><br><br><br>
+<div class="text-center">
+    <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;" class="d-none d-sm-block btn_1 home_page_btn">Register</button>
+    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="d-none d-sm-block btn_1 home_page_btn">Login</button>
+</div>
+<div id="id01" class="modal">
+
+    <form class="modal-content animate" method="post">
+        <div class="container">
+            <label for="username"  asp-for="username"><b>Usernames</b></label>
+            <input type="text" placeholder="Enter Username" name="username"  asp-for="username" required>
+
+            <label for="password" asp-for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" asp-for="password" required>
+
+            <button type="submit" asp-controller="Users" asp-action="Portfolio2">Login</button>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+<div id="id02" class="modal">
+
+    <form asp-action="Register" class="modal-content animate" method="post">
+        <div class="container"> 
+            <label for="username" asp-for="username"><b>Usernames</b></label>
+            <input type="text" asp-for="username" placeholder="Enter Username" name="username" required>
+
+            <label for="password"  asp-for="password"><b>Password</b></label>
+            <input type="password" asp-for="password" placeholder="Enter Password" name="password" required>
+
+            <button type="submit" asp-controller="Users" asp-action="Register">Register</button>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('id02');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+

@@ -1,0 +1,160 @@
+﻿@model Stonk.Models.Stock
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<!-- GRAPH JS START --><!-- GRAPH JS START --><!-- GRAPH JS START --><!-- GRAPH JS START --><!-- GRAPH JS START --><!-- GRAPH JS START --><!-- GRAPH JS START -->
+
+<div class="wrapper">
+    <div id="chart"></div>
+    <script src="plotly.js"></script>
+    <script>
+        function getStartingTime() {
+            //var date = new Date();
+            return 1573330698;
+        }
+
+        var oldBuffer = {
+            y: [4, 5, 6, 7, 8],
+            x: [1, 2, 3, 4, 5]
+        };
+
+        var buffer = {
+            y: [4, 5, 6, 7, 8],
+            x: [6, 7, 8, 9, 10]
+        };
+
+        var data = [{
+            y: [0],
+            x: [0],
+            type: "lines",
+            mode: "lines",
+            line: { color: '#17BECF' },
+            fill: 'tozeroy'
+        }];
+
+        var layout = {
+            title: 'Mock name',
+            showlegend: false
+        };
+
+        Plotly.newPlot('chart', data, layout, { displaylogo: false });
+        var date = getStartingTime();
+        var backupDate = date;
+
+        var cnt = 7;
+        var i = 0;
+
+        setInterval(function () {
+
+            Plotly.extendTraces('chart', { y: [[oldBuffer.y[i]]], x: [[oldBuffer.x[i]]] }, [0]);
+            if (buffer.x[i] != -1) {
+                oldBuffer.x[i] = buffer.x[i];
+                oldBuffer.y[i] = buffer.y[i];
+            }
+            i++;
+            if (i == 5) {
+                i = 0;
+                buffer = {
+                    y: [4, 5, 6, 7, 8],
+                    x: [cnt, cnt + 1, cnt + 2, cnt + 3, cnt + 4]
+                };
+            }
+            cnt++;
+            if (true) {
+                Plotly.relayout('chart', {
+                    xaxis: {
+                        range: [cnt - 26, cnt - 6]
+                    }
+                });
+            }
+
+        }, 1000);
+    </script>
+
+</div>
+
+<!-- GRAPH JS END --><!-- GRAPH JS END --><!-- GRAPH JS END --><!-- GRAPH JS END --><!-- GRAPH JS END --><!-- GRAPH JS END --><!-- GRAPH JS END --><!-- GRAPH JS END -->
+
+
+<div class="detailContainer">
+    <!-- CURRENT INFO START --><!-- CURRENT INFO START --><!-- CURRENT INFO START --><!-- CURRENT INFO START --><!-- CURRENT INFO START --><!-- CURRENT INFO START -->
+    Current Price: PlaceHolder
+    <br />
+    Current Trend: PlaceHolder
+    <br />
+    <!-- CURRENT INFO END --><!-- CURRENT INFO END --><!-- CURRENT INFO END --><!-- CURRENT INFO END --><!-- CURRENT INFO END --><!-- CURRENT INFO END --><!-- CURRENT INFO END -->
+    <!-- BUY BUTTON START --><!-- BUY BUTTON START --><!-- BUY BUTTON START --><!-- BUY BUTTON START --><!-- BUY BUTTON START --><!-- BUY BUTTON START --><!-- BUY BUTTON START -->
+
+    <button onclick="document.getElementById('idBuy').style.display='block'" style="width:auto;">Buy</button>
+
+    <div id="idBuy" class="modal">
+
+        <form class="modal-content animate" action="/action_page.php" method="post">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('idBuy').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <img src="img_avatar2.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Amount</b></label>
+                <input type="text" placeholder="Enter The Amount" name="uname" required>
+
+                <button type="submit">Buy</button>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('idBuy').style.display='none'" class="cancelbtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('idBuy');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    <!-- BUY BUTTON END --><!-- BUY BUTTON END --><!-- BUY BUTTON END --><!-- BUY BUTTON END --><!-- BUY BUTTON END --><!-- BUY BUTTON END --><!-- BUY BUTTON END -->
+    <!-- SELL BUTTON START --><!-- SELL BUTTON START --><!-- SELL BUTTON START --><!-- SELL BUTTON START --><!-- SELL BUTTON START --><!-- SELL BUTTON START -->
+    <button onclick="document.getElementById('idSell').style.display='block'" style="width:auto;">Sell</button>
+
+    <div id="idSell" class="modal">
+
+        <form class="modal-content animate" action="/action_page.php" method="post">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('idSell').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <img src="img_avatar2.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Amount</b></label>
+                <input type="text" placeholder="Enter The Amount" name="uname" required>
+
+                <button type="submit">Sell</button>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('idSell').style.display='none'" class="cancelbtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    <!-- SELL BUTTON END --><!-- SELL BUTTON END --><!-- SELL BUTTON END --><!-- SELL BUTTON END --><!-- SELL BUTTON END --><!-- SELL BUTTON END --><!-- SELL BUTTON END -->
+</div>
